@@ -40,7 +40,24 @@ def merge(a, b, r):
     elif r == 1:
         return (a ^ b) * 33
     elif r == 2:
-        # return ROTL32(a, ((r >> 16) % 31) + 1) ^ b
+        return (a << ((r >> 16) % 31) + 1) ^ b
+    elif r == 3:
+        return (a >> ((r >> 16) % 31) + 1) ^ b
+
+def math(a, b, r):
+    f = {
+        0: lambda a, b: a + b,
+        1: lambda a, b: a * b,
+        2: lambda a, b: a * b >> 32,
+        3: lambda a, b: min([a, b]),
+        4: lambda a, b: a,
+        5: lambda a, b: a + b,
+        6: lambda a, b: a & b,
+        7: lambda a, b: a | b,
+        8: lambda a, b: a ^ b,
+        9: lambda a, b: clz(a) + clz(b),
+        10: lambda a, b: a + b,
+    }
 
 def progpow_init(prog_seed):
     z = fnv1a(FNV_OFFSET_BASIS, prog_seed)

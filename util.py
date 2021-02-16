@@ -46,6 +46,19 @@ def isprime(x):
              return False
     return True
 
+def clz(a):
+    a = bin(a)[2:].zfill(32)
+    count_zeros = 0
+    for c in a:
+        if c == '0':
+            count_zeros += 1
+        else:
+            return count_zeros
+    return count_zeros
+
+def popcount(a):
+    pass
+
 Masks = [(1 << i) - 1 for i in range(65)]
 
 def rol(value, left, bits):
